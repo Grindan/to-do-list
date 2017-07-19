@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+<!--<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous">-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css" rel="stylesheet" integrity="sha384-gv0oNvwnqzF6ULI9TVsSmnULNb3zasNysvWwfT/s4l8k5I+g6oFz9dye0wg3rQ2Q" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <a class="navbar-brand" href="#">To-Do List</a>
+    </nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <!--class center-block-->
+        <div id="sidebar" class="sidebar col-lg-1 col-md-1 col-sm-1 hiddenText">
+            <button id="btnDots" class="btn btn-danger btn-dots"><span class="glyphicon glyphicon-option-horizontal"></span></button>
+            <ul class="sidebar__list">
+                <li class="sidebar__list__element">
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <p class="sidebar__list__element__name">Add task</p>
+                </li>
+                <li class="sidebar__list__element">
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-cog">
+                    </button>
+                    <p class="sidebar__list__element__name">Info</p>
+                </li>
+                <li class="sidebar__list__element">
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-gift"></span>
+                    </button>
+                    <p class="sidebar__list__element__name">???</p>
+                </li>
+            </ul>
+        </div>
+        <div id="content" class="col-lg-8 col-md-8 col-sm-8
+                col-lg-offset-2 col-md-offset-2 col-sm-offset-2 content">
+                Main Content
+        </div>
+    </div>
+</div>
+
+
+
+    <script src="jquery.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
