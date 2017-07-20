@@ -25,13 +25,13 @@ gulp.task('less', function() {
 });
 
 gulp.task('scripts', function() {
-  gulp.src('src/js/*')
+  gulp.src(['src/js/Task.js', 'src/js/Command.js', 'src/js/AddTaskCommand.js', 'src/js/toggle-left-menu.js', 'src/js/script.js'])
     .pipe(babel({
       presets: ['es2015', 'es2016'], 
       plugins: ["transform-es2015-arrow-functions"]
     }))
     .pipe(concat('script.js'))
-    .pipe(minifyjs())
+    //.pipe(minifyjs())
     .pipe(gulp.dest('dist/js/'));
 });
 

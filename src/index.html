@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>To-Do List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!--<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous">-->
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css" rel="stylesheet" integrity="sha384-gv0oNvwnqzF6ULI9TVsSmnULNb3zasNysvWwfT/s4l8k5I+g6oFz9dye0wg3rQ2Q" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://2.s3.envato.com/files/42255008/css/animate.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -14,42 +16,122 @@
         <a class="navbar-brand" href="#">To-Do List</a>
     </nav>
 
-<div class="container-fluid">
-    <div class="row">
-        <!--class center-block-->
-        <div id="sidebar" class="sidebar col-lg-1 col-md-1 col-sm-1 hiddenText">
-            <button id="btnDots" class="btn btn-danger btn-dots"><span class="glyphicon glyphicon-option-horizontal"></span></button>
-            <ul class="sidebar__list">
-                <li class="sidebar__list__element">
-                    <button class="btn btn-default">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                    <p class="sidebar__list__element__name">Add task</p>
-                </li>
-                <li class="sidebar__list__element">
-                    <button class="btn btn-default">
-                        <span class="glyphicon glyphicon-cog">
-                    </button>
-                    <p class="sidebar__list__element__name">Info</p>
-                </li>
-                <li class="sidebar__list__element">
-                    <button class="btn btn-default">
-                        <span class="glyphicon glyphicon-gift"></span>
-                    </button>
-                    <p class="sidebar__list__element__name">???</p>
-                </li>
-            </ul>
-        </div>
-        <div id="content" class="col-lg-8 col-md-8 col-sm-8
-                col-lg-offset-2 col-md-offset-2 col-sm-offset-2 content">
-                Main Content
+    <div id="addTaskModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">New task</h4>
+                </div>
+                <div class="modal-body">
+                    <!--<input type="text" name="taskName" id="inputTaskName" class="form-control" placeholder="Task Name" data-error="Name your task, please" required>-->
+                    <form id="loginForm" method="post" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">Task name</label>
+                            <div class="col-xs-5">
+                                <input type="text" id="inputTaskName" class="form-control" name="taskName" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">Task description</label>
+                            <div class="col-xs-5">
+                                <input type="password" class="form-control" name="taskDescription" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Back</button>
+                    <button type="button" id="btnAddTask" class="btn btn-primary">Add task</button>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
+    <div class="container-fluid">
+        <div class="row">
+            <div id="sidebar" class="sidebar col-lg-1 col-md-1 col-sm-1 hiddenText">
+                <button id="btnDots" class="btn btn-danger btn-dots"><span class="glyphicon glyphicon-option-horizontal"></span></button>
+                <ul class="sidebar__list">
+                    <li class="sidebar__list__element">
+                        <button class="btn btn-default">
+                            <span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#addTaskModal"></span>
+                        </button>
+                        <p class="sidebar__list__element__name">Add task</p>
+                    </li>
+                    <li class="sidebar__list__element">
+                        <button class="btn btn-default">
+                            <span class="glyphicon glyphicon-cog">
+                        </button>
+                        <p class="sidebar__list__element__name">Info</p>
+                    </li>
+                    <li class="sidebar__list__element">
+                        <button class="btn btn-default">
+                            <span class="glyphicon glyphicon-gift"></span>
+                        </button>
+                        <p class="sidebar__list__element__name">???</p>
+                    </li>
+                </ul>
+            </div>
 
+            <div id="content" class="col-lg-6 col-md-6 col-sm-6
+                    col-lg-offset-3 col-md-offset-3 col-sm-offset-3 content">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#activeTasks" data-toggle="tab" data-easein="fadeInUp">Active</a></li>
+                        <li class=""><a href="#completedTasks" data-toggle="tab" data-easein="fadeInUp">Completed</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="activeTasks" class="tab-pane fade active in">
+                            <p>La-la-la. Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, ipho.</p>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <input type="checkbox">
+                                    <p class="taskName">Task Name name name </p>
+                                    <div id="btnDeleteTask" class><span class="glyphicon glyphicon-remove"></span></div>
+                                </li>
+                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                <li class="list-group-item">Morbi leo risus</li>
+                                <li class="list-group-item">Porta ac consectetur ac</li>
+                                <li class="list-group-item">Vestibulum at eros</li>
+                            </ul>
+                        </div>
+                        <div id="completedTasks" class="tab-pane fade animated fadeInUp">
+                            <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
 
-    <script src="jquery.js"></script>
+    <div class="form-horizontal" data-toggle="validator">
+        <fieldset>
+            <legend>Adding new task</legend>
+            <!-- class has-error-->
+            <div class="form-group">
+            <label for="inputTaskName" class="col-lg-2 control-label">Task Name</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputTaskName" placeholder="Task Name" data-error="Name your task, please" required>
+            </div>
+            </div>
+            <div class="form-group">
+            <label for="textArea" class="col-lg-2 control-label">Description</label>
+            <div class="col-lg-10">
+                <textarea class="form-control" rows="3" id="textArea"></textarea>
+                <span class="help-block">Add description for this task if You want.</span>
+            </div>
+            </div>
+            <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default">Cancel</button>
+                <button type="" class="btn btn-primary">Submit</button>
+            </div>
+            </div>
+        </fieldset>
+    </div>
+
     <script src="js/script.js"></script>
+    <script>
+        
+    </script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 
 html, body, .container-fluid, .row {
     height: 100%;
-    font-size: 1vw;
+   // font-size: 1vw;
 }
 
 p { margin: 0; }
@@ -23,20 +23,47 @@ button:focus { outline: 0 !important; }
 }
 
 .content {
-    background: yellowgreen;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    .nav-tabs { padding-left: 35%; }
+    .list-group-item {
+        * { display: inline-block; }
+        .taskName {
+            width: 50%;
+            padding: 0 1em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        #btnDeleteTask {
+            float: right;
+            &:hover { color: red; }
+        }
+    }
 }
 
 .sidebar {
-    padding: 0;
+    transition: all 0.5s ease-in-out;
     .btn {
         border-radius: 50%;
-        height: 6rem;
-        width: 6rem;
-        font-size: 1.5rem;
+        height: 4rem;
+        width: 4rem;
+        font-size: 1em;
     }
     &__list {
         list-style: none;
         position: absolute;
+        &__element * { 
+            transition: all 0.5s ease-in-out;
+            position: relative;
+            span {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+            }
+        }
     }
 }
 
@@ -44,26 +71,19 @@ button:focus { outline: 0 !important; }
 .visibleText {
     .sidebar__list__element {
         .btn {
-            width: 4rem;
-            height: 4rem;
-            transition: all 0.5s ease-in-out;
+            width: 3rem;
+            height: 3rem;
         }
-        &__name {
-            transition: all 1s ease-in-out;
-        }
+        &__name { font-size: 1.5rem; }
     }
 }
 
 .hiddenText {
     .sidebar__list__element {
         .btn {
-            width: 6rem;
-            height: 6rem;
-            transition: all 0.5s ease-in-out;
+            width: 4rem;
+            height: 4rem;
         }
-        &__name {
-            font-size: 0;
-            transition: all 1s ease-in-out;
-        }
+        &__name { font-size: 0; }
     }
 }

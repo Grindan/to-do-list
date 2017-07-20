@@ -4,11 +4,21 @@
         height: 100%;
         border-right: 4px solid #e2e2e2;
 
+        .btn-dots {
+            display: block;
+            margin: 1rem auto 0;
+        }
+
         &__list {
             margin: 0;
             width: 100%;
             position: absolute;
             top: 35%;
+            &__element {
+                margin-top: 1rem;
+                * { display: inline-block; }
+                &__name { padding-left: 1em; }
+            }
         }
     }
 }
