@@ -25,7 +25,13 @@ gulp.task('less', function() {
 });
 
 gulp.task('scripts', function() {
-  gulp.src(['src/js/Task.js', 'src/js/Command.js', 'src/js/AddTaskCommand.js', 'src/js/toggle-left-menu.js', 'src/js/script.js'])
+  gulp.src([
+      // classes
+      'src/js/Task.js', 'src/js/Command.js', 'src/js/AddTaskCommand.js',
+      // animations
+      'src/js/toggle-left-menu.js','src/js/tabs-animation.js',
+      // work with tasks
+      'src/js/script.js'])
     .pipe(babel({
       presets: ['es2015', 'es2016'], 
       plugins: ["transform-es2015-arrow-functions"]

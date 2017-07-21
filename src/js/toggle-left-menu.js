@@ -1,36 +1,22 @@
-let btnDots = document.getElementById('btnDots');
+let sidebar = $('#sidebar');
+let content = $('#content');
+let btnArrow = $('#btnArrow');
 
-let sidebar = document.getElementById('sidebar');
-let content = document.getElementById('content');
-
-btnDots.addEventListener('click', changeSidebarSize);
+btnArrow[0].addEventListener('click', changeSidebarSize);
 
 function changeSidebarSize() {
-    if (sidebar.classList.contains('col-lg-1')) {
-        removeClasses(sidebar, 'col-lg-1 col-md-1 col-sm-1 hiddenText');
-        addClasses(sidebar, 'col-lg-2 col-md-2 col-sm-2 visibleText');
-        removeClasses(content, 'col-lg-11 col-md-11 col-sm-11');
-        addClasses(content, 'col-lg-10 col-md-10 col-sm-10')
+    if (sidebar.hasClass('col-lg-1')) {
+        sidebar.removeClass('col-lg-1 col-md-1 col-sm-1 hiddenText')
+                .addClass('col-lg-2 col-md-2 col-sm-2 visibleText');
+        content.removeClass('col-lg-11 col-md-11 col-sm-11')
+                .addClass('col-lg-10 col-md-10 col-sm-10');
+        btnArrow.removeClass('btn-not-rotated').addClass('btn-rotated');
     } else {
-        removeClasses(sidebar, 'col-lg-2 col-md-2 col-sm-2 visibleText');
-        addClasses(sidebar, 'col-lg-1 col-md-1 col-sm-1 hiddenText');
-        removeClasses(content, 'col-lg-10 col-md-10 col-sm-10');
-        addClasses(content, 'col-lg-11 col-md-11 col-sm-11')
+        sidebar.removeClass('col-lg-2 col-md-2 col-sm-2 visibleText')
+                .addClass('col-lg-1 col-md-1 col-sm-1 hiddenText');
+        content.removeClass('col-lg-10 col-md-10 col-sm-10')
+                .addClass('col-lg-11 col-md-11 col-sm-11');
+        btnArrow.removeClass('btn-rotated').addClass('btn-not-rotated');
     }
-}
-
-function removeClasses(element, classes) {
-    var elementClasses = element.classList;
-    classes = classes.split(' ');
-    classes.forEach(cl => { elementClasses.remove(cl); });
-}
-
-function addClasses(element, classes) {
-    var elementClasses = element.classList;
-    classes = classes.split(' ');
-    classes.forEach(cl => { elementClasses.add(cl); });
-}
-
-
-
+};
 
