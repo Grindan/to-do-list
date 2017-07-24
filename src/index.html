@@ -24,17 +24,17 @@
                     <h4 class="modal-title">New task</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="loginForm" method="post" class="form-horizontal">
+                    <form class="form-horizontal">
                         <div id="taskNameForm" class="form-group">
                             <label class="col-xs-3 control-label">Task name</label>
-                            <div class="col-xs-5">
+                            <div class="col-xs-8">
                                 <input type="text" id="inputTaskName" class="form-control" name="taskName" />
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-xs-3 control-label">Task description</label>
-                            <div class="col-xs-5">
-                                <input type="password" class="form-control" name="taskDescription" />
+                        <div id="taskDescriptionForm" class="form-group">
+                            <label class="col-xs-3 control-label">Task name</label>
+                            <div class="col-xs-8">
+                                <textarea id="inputTaskDescription" class="form-control" rows="5"></textarea>
                             </div>
                         </div>
                     </form>
@@ -42,6 +42,46 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Back</button>
                     <button type="button" id="btnAddTask" class="btn btn-primary">Add task</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="infoModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Info</h4>
+                </div>
+                <div class="modal-body">
+                    <p>This page was created for notes.</p>
+                    <img class="info-image animated fadeInUp" src="images/warking.png" alt="Info(not) image."> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Clear!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="additionalModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
+                    <h4 class="modal-title">Info</h4>
+                </div>
+                <div class="modal-body">
+                    <video id="video" controls poster="images/megaphone.png">
+                        <source src="video/shia.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                        <source src="video/shia.ogg" type='video/ogg; codecs="theora, vorbis"'>
+                        <p>Your browser doesn't support video tag.</p>
+                    </video>
+                    <p>Hope this video will help You :)</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnAdditionModalClose" type="button" class="btn btn-primary" data-dismiss="modal">I will do it!</button>
                 </div>
             </div>
         </div>
@@ -59,16 +99,16 @@
                         <p class="sidebar__list__element__name" data-toggle="modal" data-target="#addTaskModal">Add task</p>
                     </li>
                     <li class="sidebar__list__element">
-                        <button class="btn btn-default">
+                        <button class="btn btn-default" data-toggle="modal" data-target="#infoModal">
                             <span class="glyphicon glyphicon-cog">
                         </button>
-                        <p class="sidebar__list__element__name">Info</p>
+                        <p class="sidebar__list__element__name" data-toggle="modal" data-target="#infoModal">Info</p>
                     </li>
                     <li class="sidebar__list__element">
-                        <button class="btn btn-default">
+                        <button class="btn btn-default" data-toggle="modal" data-target="#additionalModal">
                             <span class="glyphicon glyphicon-gift"></span>
                         </button>
-                        <p class="sidebar__list__element__name">???</p>
+                        <p class="sidebar__list__element__name" data-toggle="modal" data-target="#additionalModal">???</p>
                     </li>
                 </ul>
             </div>
@@ -76,76 +116,28 @@
             <div id="content" class="col-lg-6 col-md-6 col-sm-6
                     col-lg-offset-3 col-md-offset-3 col-sm-offset-3 content">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#activeTasks" data-toggle="tab" data-easein="fadeInUp">Active</a></li>
-                        <li class=""><a href="#completedTasks" data-toggle="tab" data-easein="fadeInUp">Completed</a></li>
+                        <li class="active"><a href="#activeTasks" data-toggle="tab">Active</a></li>
+                        <li class=""><a href="#completedTasks" data-toggle="tab">Completed</a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="activeTasks" class="tab-pane fade active in">
-                            <img id="imgNoActiveTasks" class="info-image hidden-image" src="images/relax.jpg" alt="You haven't active tasks.">
-                            <ul id="activeTasksList" class="list-group">
-                                <li id="initTask1" class="list-group-item">
-                                    <input type="checkbox">
-                                    <p class="taskName">Task Name name name </p>
-                                    <span class="glyphicon glyphicon-remove deleteTask"></span>
-                                </li>
-                                <li id="initTask2" class="list-group-item">
-                                    <input type="checkbox">
-                                    <p class="taskName">Task Name 2 </p>
-                                    <span class="glyphicon glyphicon-remove deleteTask"></span>
-                                </li>
-                                <li id="initTask3" class="list-group-item">
-                                    <input type="checkbox">
-                                    <p class="taskName">Task Name 3 </p>
-                                    <span class="glyphicon glyphicon-remove deleteTask"></span>
-                                </li>
-                                <li id="initTask4" class="list-group-item">
-                                    <input type="checkbox">
-                                    <p class="taskName">Task Name 4 </p>
-                                    <span class="glyphicon glyphicon-remove deleteTask"></span>
-                                </li>
-                            </ul>
+                            <ul id="activeTasksList" class="list-group"></ul>
+                            <div>
+                                <h2>No Active tasks. Just relax.</h2>
+                                <img class="info-image animated fadeInUp" src="images/happy.png" alt="You haven't active tasks."> 
+                            </div>
                         </div>
                         <div id="completedTasks" class="tab-pane fade animated fadeInUp">
-                            <img id="imgNocompletedTasks" class="info-image hidden-image" src="" alt="You haven't completed tasks.">
-                            <ul id="completedTasksList" class="list-group">
-                                <li class="list-group-item">
-                                    <input type="checkbox">
-                                    <p class="taskName">Task Name name name </p>
-                                    <span class="glyphicon glyphicon-remove deleteTask"></span>
-                                </li>
-                            </ul>
+                            <ul id="completedTasksList" class="list-group"></ul>
+                            <div>
+                                <h2>Nothing is completed.</h2>
+                                <img class="info-image animated fadeInUp" src="images/busy.png" alt="You haven't completed tasks."> 
+                            </div>
                         </div>
                     </div>
             </div>
         </div>
     </div>
-
-    <div class="form-horizontal" data-toggle="validator">
-        <fieldset>
-            <legend>Adding new task</legend>
-            <!-- class has-error-->
-            <div class="form-group">
-            <label for="inputTaskName" class="col-lg-2 control-label">Task Name</label>
-            <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputTaskName" placeholder="Task Name" data-error="Name your task, please" required>
-            </div>
-            </div>
-            <div class="form-group">
-            <label for="textArea" class="col-lg-2 control-label">Description</label>
-            <div class="col-lg-10">
-                <textarea class="form-control" rows="3" id="textArea"></textarea>
-                <span class="help-block">Add description for this task if You want.</span>
-            </div>
-            </div>
-            <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
-                <button type="reset" class="btn btn-default">Cancel</button>
-                <button type="" class="btn btn-primary">Submit</button>
-            </div>
-            </div>
-        </fieldset>
-    </div>
-
     <script src="js/script.js"></script>
 </body>
 </html>
