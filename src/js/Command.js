@@ -1,6 +1,6 @@
-// class Command {
-//     constructor() { }
+class Command {
+    constructor() { }
 
-//     execute() { }
-//     undo () { }
-// }
+    execute() { }
+    undo () { }
+}
