@@ -11,7 +11,6 @@
     "fs.realpath": "^1.0.0",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1",
-    "gulp-connect": "^5.0.0",
     "gulp-html-minifier": "^0.1.8",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-watch": "^4.3.11",
@@ -37,7 +36,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "i": "npm install gulp",
-    "start": "gulp"
+    "start": "gulp build & gulp run"
   },
   "repository": {
     "type": "git",
