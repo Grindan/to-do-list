@@ -6,17 +6,23 @@ class Session {
 
     addTask(task) {
         let command = new AddTaskCommand(task);
-        this.prevCommands.push(command);
-        this.nextCommands = [];
-        command.execute();
+        this.addNewCommand(command);
     }
 
     deleteTask(task) {
         let command = new DeleteTaskCommand(task);
-        this.prevCommands.push(command);
-        this.nextCommands = [];
-        command.execute();
+        this.addNewCommand(command);
     };
+
+    checkTask(task) {
+        let command = new CheckTaskCommand(task);
+        this.addNewCommand(command);
+    }
+
+    uncheckTask(task) {
+        let command = new UncheckTaskCommand(task);
+        this.addNewCommand(command);
+    }
 
     undo() {
         if (!this.prevCommands.length) { return; }
@@ -29,6 +35,12 @@ class Session {
         if (!this.nextCommands.length) { return; }
         let command = this.nextCommands.pop();
         this.prevCommands.push(command);
+        command.execute();
+    }
+
+    addNewCommand(command) {
+        this.prevCommands.push(command);
+        this.nextCommands = [];
         command.execute();
     }
 }

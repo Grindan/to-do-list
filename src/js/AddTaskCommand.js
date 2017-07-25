@@ -5,7 +5,8 @@ class AddTaskCommand extends Command {
     }
 
     execute() {
-        addNewTaskElement(this.task);
+        if (this.task.isDone) addCompletedTaskElement(this.task);
+        else addNewTaskElement(this.task);
         addTaskToDB(this.task);
     }
 

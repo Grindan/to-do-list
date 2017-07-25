@@ -15,8 +15,6 @@ $('#btnAddTask')[0].addEventListener('click', function() {
         $('#taskNameForm').removeClass('has-error');
         $('#inputTaskName')[0].value = '';
         $('#addTaskModal').modal('toggle');
-        // addNewTaskElement(newTask);
-        // addTaskToDB(newTask);
     }
 });
 
@@ -41,6 +39,8 @@ function addCompletedTaskElement(task) {
     var newLi = document.createElement('li');
     newLi.id = taskID;
     newLi.classList.add('list-group-item');
+    newLi.classList.add('animated');
+    newLi.classList.add('fadeInUp');
     newLi.innerHTML = '<input type="checkbox" checked>'
                     + '<p class="taskName">' + taskName + '</p>'
                     + '<span class="glyphicon glyphicon-remove deleteTask"></span>';
@@ -48,22 +48,25 @@ function addCompletedTaskElement(task) {
     ul.appendChild(newLi);
 }
 
+function deleteNode(node, animationType) {
+    node.classList.add('animated');
+    node.classList.add(animationType);
+    setTimeout(() => node.remove(), 500);
+}
+
+
 const CHECK_ELEMENT = 'INPUT';
 const DELETE_ELEMENT = 'SPAN';
 
 $('#activeTasksList').click(function(event) {
     event.stopPropagation();
     if (event.target.nodeName == CHECK_ELEMENT) {
-        deleteNode(event.target.parentElement, 'fadeOutRight');
         var taskName = event.target.parentElement.id.split('-').join(' ');
         var task = new Task(taskName, 0);
-        executeTaskInDB(task);
-        addCompletedTaskElement(task);
+        session.checkTask(task);
     } else if (event.target.nodeName == DELETE_ELEMENT) {
         var newTask = new Task(event.target.parentElement.id.split('-').join(' '));
         session.deleteTask(newTask);
-        // deleteNode(event.target.parentElement, 'fadeOutLeft');
-        // deleteTaskFromDB(new Task(taskName, 0));
     }
 });
 
@@ -71,21 +74,22 @@ $('#activeTasksList').click(function(event) {
 $('#completedTasksList').click(function(event) {
     event.stopPropagation();
     if (event.target.nodeName == CHECK_ELEMENT) {
-        deleteNode(event.target.parentElement, 'fadeOutRight');
         var taskName = event.target.parentElement.id.split('-').join(' ');
         var task = new Task(taskName, 1);
-        undoTaskInDB(task);
-        addNewTaskElement(task);
+        session.uncheckTask(task);
     } else if (event.target.nodeName == DELETE_ELEMENT) {
-        deleteNode(event.target.parentElement, 'fadeOutLeft');
         var taskName = event.target.parentElement.id.split('-').join(' ');
-        deleteTaskFromDB(new Task(taskName, 1));
+        var task = new Task(taskName, 1);
+        session.deleteTask(task);
     }
 });
 
 
-function deleteNode(node, animationType) {
-    node.classList.add('animated');
-    node.classList.add(animationType);
-    setTimeout(() => node.remove(), 500);
-}
+$(document).keydown(function(e){
+    if (e.which === 90 && e.ctrlKey){
+        session.undo();
+    } else if(e.which === 89 && e.ctrlKey){
+        session.do();
+    }
+});
+

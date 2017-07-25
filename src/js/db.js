@@ -39,19 +39,3 @@ function executeTaskInDB(task) {
 function undoTaskInDB(task) {
     db.transaction(tx => tx.executeSql('UPDATE TASKS SET isDone=0 WHERE name=?', [task.name]));
 }
-
-// function selectRow(query, callBack) {
-//    var result = [];
-//    db.transaction(function (tx) {
-//       tx.executeSql(query, [], function(tx, rs){
-//          for(var i=0; i<rs.rows.length; i++) {
-//             var row = rs.rows.item(i)
-//             result[i] = { id: row['id'],
-//                           name: row['name']
-//             }
-//          }
-//          console.log(result);
-//          callBack(result);
-//       });
-//    });
-// } 

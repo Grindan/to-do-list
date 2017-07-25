@@ -1,4 +1,4 @@
-class CheckTaskCommand extends Command {
+class UncheckTaskCommand extends Command {
     constructor(task) {
         super();
         this.task = task;
@@ -7,14 +7,14 @@ class CheckTaskCommand extends Command {
     execute() {
         var node = document.getElementById(this.task.name.split(' ').join('-'));
         deleteNode(node, 'fadeOutRight');
-        executeTaskInDB(this.task);
-        addCompletedTaskElement(this.task);
+        undoTaskInDB(this.task);
+        addNewTaskElement(this.task);
     }
 
     undo() {
         var node = document.getElementById(this.task.name.split(' ').join('-'));
         deleteNode(node, 'fadeOutRight');
-        undoTaskInDB(this.task);
-        addNewTaskElement(this.task);
+        executeTaskInDB(this.task);
+        addCompletedTaskElement(this.task);
     }
 }

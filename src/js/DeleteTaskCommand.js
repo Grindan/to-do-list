@@ -5,16 +5,14 @@ class DeleteTaskCommand extends Command {
     }
 
     execute() {
-        // taskList.splice(taskList.indexOf(this.task.name), 1);
         var node = document.getElementById(this.task.name.split(' ').join('-'));
         deleteNode(node, 'fadeOutLeft');
         deleteTaskFromDB(this.task);
     }
 
     undo() {
-        // taskList.push(this.task);
-        // addNewTaskElement(this.task.name); // change task.name to task
-        addNewTaskElement(this.task);
+        if (this.task.isDone) addCompletedTaskElement(this.task);
+        else addNewTaskElement(this.task);
         addTaskToDB(this.task);
     }
 }

@@ -8,13 +8,6 @@ var webserver = require('gulp-webserver');
 var concat = require('gulp-concat');
 var babel = require('gulp-babel');
 
-
-var gulp = require("gulp"),
-    babelify = require('babelify'),
-    browserify = require("browserify"),
-    connect = require("gulp-connect"),
-    source = require("vinyl-source-stream");
-
 gulp.task('html', function() {
   gulp.src('src/*.html')
     .pipe(htmlmin({collapseWhitespace: true}))
@@ -33,7 +26,8 @@ gulp.task('less', function() {
 gulp.task('scripts', function() {
   gulp.src([
       // classes
-      'src/js/Task.js', 'src/js/Command.js', 'src/js/AddTaskCommand.js', 'src/js/DeleteTaskCommand.js', 'src/js/Session.js',
+      'src/js/Task.js', 'src/js/Command.js', 'src/js/AddTaskCommand.js', 'src/js/DeleteTaskCommand.js',
+      'src/js/CheckTaskCommand.js', 'src/js/UncheckTaskCommand.js', 'src/js/Session.js',
       // animations
       'src/js/toggle-left-menu.js','src/js/tabs-animation.js',
       // work with tasks
