@@ -61,8 +61,13 @@ gulp.task('watch', function() {
 gulp.task('webserver', function() {
   gulp.src('dist/')
     .pipe(webserver({
+      // fallback: 'index.html',
       livereload: true,
-      open: true
+      open: true,
+      directoryListing: {
+        enable: true,
+        path: 'dist/index.html'
+      }
     }));
 });
 
